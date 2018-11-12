@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.com.baizhi.dao.GuruDao">
+    <select id="queryByPage" resultType="com.baizhi.com.baizhi.entity.Guru">
+        select  id,HeadPic,name,status from guru limit #{start},#{rows}
+    </select>
+    <insert id="insert" parameterType="com.baizhi.com.baizhi.entity.Guru">
+        insert into guru values(#{id},#{HeadPic},#{name},#{status})
+    </insert>
+    <delete id="delete" parameterType="com.baizhi.com.baizhi.entity.Guru">
+        delete from guru where id=#{id}
+    </delete>
+    <select id="findTotals" resultType="long">
+        select count(id) from  guru
+    </select>
+    <update id="update" parameterType="com.baizhi.com.baizhi.entity.Guru">
+        update guru set name=#{name},status=#{status} where id=#{id}
+    </update>
+    <select id="queryOne" parameterType="java.lang.String" resultType="com.baizhi.com.baizhi.entity.Guru">
+        select  id,HeadPic,name,status from guru where id=#{id}
+    </select>
+    <select id="queryAll" resultType="com.baizhi.com.baizhi.entity.Guru">
+        select id,HeadPic,name,status from guru
+    </select>
+</mapper>

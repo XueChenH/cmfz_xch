@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.com.baizhi.dao.AdminDao">
+    <select id="queryAll" resultType="com.baizhi.com.baizhi.entity.Admin">
+        select id,name,glname,password,sex from gl
+    </select>
+   <update id="update" parameterType="com.baizhi.com.baizhi.entity.Admin">
+       update gl set password=#{password} where id=#{id}
+   </update>
+    <select id="queryOne" resultType="com.baizhi.com.baizhi.entity.Admin">
+        select id,name,glname,password,sex from gl where glname=#{glname} and password=#{password}
+    </select>
+</mapper>

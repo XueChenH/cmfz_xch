@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.com.baizhi.dao.ArticleDao">
+    <resultMap id="map" type="com.baizhi.com.baizhi.entity.Article">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="insertImgPath" column="insertImgPath"/>
+        <result property="content" column="content"/>
+        <result property="publishDate" column="publishDate"/>
+        <result property="guru_id" column="guru_id"/>
+        <association property="guru" javaType="com.baizhi.com.baizhi.entity.Guru">
+            <id property="id" column="g_id"/>
+            <result property="name" column="name"/>
+        </association>
+    </resultMap>
+
+
+    <select id="queryByPage" resultMap="map">
+        select a.id,a.title,a.content,a.insertImgPath,a.publishDate,a.guru_id,g.id g_id,g.name from article a join guru g on a.guru_id=g.id limit #{start},#{rows}
+    </select>
+    <insert id="insert" parameterType="com.baizhi.com.baizhi.entity.Article">
+        insert into article values(#{id},#{title},#{content},#{insertImgPath},#{publishDate},#{guru_id})
+    </insert>
+    <delete id="delete" parameterType="com.baizhi.com.baizhi.entity.Article">
+        delete from article where id=#{id}
+    </delete>
+    <select id="findTotals" resultType="long">
+        select count(id) from  article
+    </select>
+    <update id="update" parameterType="com.baizhi.com.baizhi.entity.Article">
+        update article set title=#{title},content=#{content},guru_id=#{guru_id} where id=#{id}
+    </update>
+
+    <select id="queryOne"  resultType="com.baizhi.com.baizhi.entity.Article">
+        select  id,title,content,insertImgPath,publishDate,guru_id from article where id=#{id}
+    </select>
+</mapper>

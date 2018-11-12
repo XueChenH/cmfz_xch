@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.com.baizhi.dao.CourseDao">
+    <select id="queryByPage" resultType="com.baizhi.com.baizhi.entity.Course">
+        select  id,title,marking,date from course limit #{start},#{rows}
+    </select>
+    <insert id="insert" parameterType="com.baizhi.com.baizhi.entity.Course">
+        insert into course values(#{id},#{title},#{marking},#{date})
+    </insert>
+    <delete id="delete" parameterType="com.baizhi.com.baizhi.entity.Course">
+        delete from course where id=#{id}
+    </delete>
+    <select id="findTotals" resultType="long">
+        select count(id) from  course
+    </select>
+    <update id="update" parameterType="com.baizhi.com.baizhi.entity.Course">
+        update course set title=#{title},marking=#{marking} where id=#{id}
+    </update>
+    <select id="queryOne" parameterType="java.lang.String" resultType="com.baizhi.com.baizhi.entity.Course">
+        select  id,title,marking,date from course where id=#{id}
+    </select>
+</mapper>

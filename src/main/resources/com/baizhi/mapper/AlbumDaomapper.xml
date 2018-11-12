@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.com.baizhi.dao.AlbumDao">
+    <resultMap id="map" type="com.baizhi.com.baizhi.entity.Album">
+        <id property="id" column="pid"/>
+        <result property="title" column="ptitle"/>
+        <result property="albumpath" column="albumpath"/>
+        <result property="set_count" column="set_count"/>
+        <result property="create_date" column="create_date"/>
+        <result property="score" column="score"/>
+        <result property="author" column="author"/>
+        <result property="broadcast" column="broadcast"/>
+        <result property="brief" column="brief"/>
+        <collection property="children" ofType="com.baizhi.com.baizhi.entity.Chapter">
+            <id property="id" column="id"/>
+            <result property="title" column="title"/>
+            <result property="size" column="size"/>
+            <result property="duration" column="duration"/>
+            <result property="downLoadPath" column="downLoadPath"/>
+            <result property="upLoadDate" column="upLoadDate"/>
+        </collection>
+    </resultMap>
+
+    <select id="queryByPage" resultMap="map">
+         select p.id pid,p.title ptitle,albumpath,set_count,create_date,score,author,broadcast,brief ,c.* from album p left join chapter c on p.id=c.album_id limit #{start},#{rows}
+    </select>
+
+    <select id="findTotals" resultType="long">
+        select count(id) from  album
+    </select>
+    <select id="queryAll" resultType="com.baizhi.com.baizhi.entity.Album">
+        select id,albumpath,title,set_count,create_date,score,author,broadcast,brief from album
+    </select>
+    <select id="queryOne" resultType="com.baizhi.com.baizhi.entity.Album">
+        select id,albumpath,title,set_count,create_date,score,author,broadcast,brief from album where id=#{id}
+    </select>
+    <insert id="insert" parameterType="com.baizhi.com.baizhi.entity.Album">
+        insert into album values(#{id},#{albumpath},#{title},#{set_count},#{create_date},#{score},#{author},#{broadcast},#{brief})
+    </insert>
+    <delete id="delete" parameterType="com.baizhi.com.baizhi.entity.Album">
+        delete from album where id =#{id}
+    </delete>
+    <update id="update" parameterType="com.baizhi.com.baizhi.entity.Album">
+        update album set albumpath=#{albumpath},title=#{title},set_count=#{set_count},create_date=#{create_date},score=#{score},author=#{author},
+        broadcast=#{broadcast},brief=#{brief}
+    </update>
+</mapper>

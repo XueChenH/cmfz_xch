@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.com.baizhi.dao.UserDao">
+    <sql id="map">
+        id,name,phoneNum,username,password,salt,dharmName,gender,headPic,province,city,sign,status,date
+    </sql>
+
+    <select id="queryOne" resultType="com.baizhi.com.baizhi.entity.User">
+         select   id,name,phoneNum,username,password,salt,dharmName,gender,headPic,province,city,sign,status,date from cmfz_user where id=#{id}
+    </select>
+    <select id="login" resultType="com.baizhi.com.baizhi.entity.Course">
+            select   id,name,phoneNum,username,password,salt,dharmName,gender,headPic,province,city,sign,status,date from cmfz_user where password=#{password}
+    </select>
+    <insert id="insert" parameterType="com.baizhi.com.baizhi.entity.Course">
+        insert into cmfz_user values(#{id},#{name},#{phoneNum},#{username},#{password},#{salt},#{dharmName},#{gender},#{headPic},#{province},#{city},#{sign},#{status},#{date})
+    </insert>
+    <update id="update" parameterType="com.baizhi.com.baizhi.entity.Course">
+        update cmfz_user set name=#{name},phoneNum=#{phoneNum},username=#{username},password=#{password},
+        salt=#{salt},dharmName=#{dharmName},gender=#{gender},headPic=#{headPic},province=#{province},city=#{city},sign=#{sign},status=#{status},date=#{date}
+        where id=#{id}
+    </update>
+</mapper>
